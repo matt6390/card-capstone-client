@@ -2,7 +2,9 @@ require 'unirest'
 
 require_relative 'controllers/cards_controller'
 require_relative 'controllers/users_controller'
+require_relative 'controllers/user_cards_controller'
 require_relative 'views/cards_views'
+require_relative 'views/user_cards_views'
 require_relative 'models/card'
 
 class Frontend
@@ -10,6 +12,8 @@ class Frontend
   include CardsController
   include CardsViews
   include UsersController
+  include UserCardsController
+  include UserCardsViews
 
   def run
     while true
@@ -18,10 +22,13 @@ class Frontend
       system 'clear'
 
       puts "Press [1] to show all cards"
+      # puts "    Press [1.1] to search by name"
       puts "Press [2] to show a specific card"
       puts "Press [3] to create a new card"
       puts "Press [4] to update a card"
-      puts "Press [5] to update a card"
+      puts "Press [5] to delete a card"
+      puts
+      puts "Enter [cards] to display your cards"
       puts
       puts "Enter [signup] to create a new user account"
       puts "Enter [login] to login to your account"
@@ -32,10 +39,14 @@ class Frontend
 
 
       if user_choice == "1"
-        cards_show_action
+        cards_index_action
+
+      # elsif user_choice == "1.1"
+      #   cards_search_action
+        
 
       elsif user_choice == "2"
-        cards_index_action
+        cards_show_action
 
           
       elsif user_choice == "3"
@@ -46,6 +57,10 @@ class Frontend
 
       elsif user_choice == "5"
         card_destroy_action
+
+      elsif user_choice == "cards"
+        user_cards_index_action
+        
 
       elsif user_choice == "signup"
         user_create_action
