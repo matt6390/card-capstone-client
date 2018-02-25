@@ -1,4 +1,11 @@
 module PricesController
+  def prices_index_action(input_id)
+    response = Unirest.get("http://localhost:3000/prices?search=#{input_id}")
+    prices = response.body
+
+    prices_index_view(prices)
+  end
+
   def price_create_action
     print "Enter the ID of the card to see: "
 
@@ -29,7 +36,7 @@ module PricesController
     price = response.body
     price_show_view(price)
   end
-  
+
 end
 
 

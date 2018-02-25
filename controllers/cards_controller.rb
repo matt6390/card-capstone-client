@@ -16,11 +16,13 @@ module CardsController
         card = response.body
         card_show_view(card)
 
-        print "Press 'c' to show the comments on this card, or press 'enter' to continue: "
+        print "Press 'c' to show the comments on this card, 'p' to see its prices, or press 'enter' to continue: "
         com_choice = gets.chomp
 
         if com_choice == 'c'
-            cards_comments_action(input_id)
+            comments_show_action(input_id)
+        elsif com_choice == 'p'
+            prices_index_action(input_id)
         end
     end
 
@@ -64,7 +66,7 @@ module CardsController
         card_json = response.body
 
 
-        print "Name (#{card_json["name"]}):"
+        print "Name (#{card_json["name"]}): "
         client_params[:name] = gets.chomp
 
         print "Description (#{card_json["description"]}): "
@@ -88,7 +90,7 @@ module CardsController
 
         card = update_response.body
 
-        puts JSON.pretty_generate(card)
+        card_show_view(card)
     end
 
     def card_destroy_action
@@ -98,14 +100,6 @@ module CardsController
 
         json_data = response.body
         puts json_data["message"]
-    end
-
-    def cards_comments_action(card_id)
-        response = Unirest.get("http://localhost:3000/comments/#{card_id}")
-        comments = response.body
-        p comments
-        comments_index_view(comments)
-        
     end
 end
     

@@ -24,4 +24,11 @@ module CommentsController
 
     comment_show_view(comment)
   end
+
+  def comments_show_action(card_id)
+      response = Unirest.get("http://localhost:3000/comments/#{card_id}")
+      comments = response.body
+      # p comments
+      comments_index_view(comments)
+  end
 end

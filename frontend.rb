@@ -32,29 +32,30 @@ class Frontend
 
       system 'clear'
       puts "Welcome to My Card Capstone"
-      puts
+      puts "=" * 80
       puts
 
       puts "Enter [signup] to create a new user account"
       puts "Enter [login] to login to your account"
+      # puts "      Enter [user] to update user information"
       puts "Enter [logout] to logout of your account"
       puts
       puts "Enter [remove] to remove your account"
-      puts
+      puts "-" * 50
       puts
       puts "Press [1] to show all cards"
+      puts "   Enter [cards] to display your cards"
       # puts "    Press [1.1] to search by name"
       # puts "    Press [1.2] to show Community cards"
       puts "Press [2] to show a specific card"
-      puts "    Press [2.1] give a specific card a price"
+      puts "    Press [2.1] to leave a price on a card"
       puts "    Press [2.2] to leave a comment on a card"
       puts "Press [3] to create a new card"
       puts "Press [4] to update a card"
-      puts "Press [5] to delete a card"
+      puts "Press [5] to delete one of your cards"
+      puts "-" * 50
       puts
-      puts "Enter [cards] to display your cards"
-      puts
-      puts "Enter [comments] to display your comments"
+      puts "Enter [comments] to display all comments"
       puts
       puts "Press [q] to quit"
       user_choice = gets.chomp
@@ -86,7 +87,7 @@ class Frontend
         card_update_action
 
       elsif user_choice == "5"
-        card_destroy_action
+        user_card_destroy_action
 
       elsif user_choice == "cards"
         user_cards_index_action
@@ -117,6 +118,9 @@ class Frontend
                                 )
         jwt = response.body["jwt"]
         Unirest.default_header("Authorization", "Bearer #{jwt}")
+
+      # elsif user_choice == "user"
+      #     user_update_action
 
       elsif user_choice == "logout"
         jwt = ""
