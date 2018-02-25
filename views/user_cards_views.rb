@@ -1,6 +1,5 @@
 module UserCardsViews
   def user_cards_show_view(user_card)
-    p user_card
     puts
     puts "=" * 50
     puts "Card Owner: #{user_card["user_name"]}"
@@ -17,6 +16,7 @@ module UserCardsViews
 
   def user_cards_index_view(cards)
     cards.each do |card|
+      puts "#{card["id"]}"
       puts "Card Name: #{card["name"]}"
       puts "-" * 80
       puts "Card Description: #{card["description"]}"
@@ -28,3 +28,6 @@ module UserCardsViews
     end
   end
 end
+
+
+

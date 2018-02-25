@@ -1,18 +1,29 @@
 require 'unirest'
 
 require_relative 'controllers/cards_controller'
+require_relative 'controllers/comments_controller'
 require_relative 'controllers/users_controller'
+require_relative 'controllers/prices_controller'
 require_relative 'controllers/user_cards_controller'
+
 require_relative 'views/cards_views'
+require_relative 'views/comments_views'
+require_relative 'views/prices_views'
 require_relative 'views/user_cards_views'
+
 require_relative 'models/card'
 
 class Frontend
 
   include CardsController
-  include CardsViews
+  include CommentsController
   include UsersController
+  include PricesController
   include UserCardsController
+  
+  include CardsViews
+  include CommentsViews
+  include PricesViews
   include UserCardsViews
 
   def run
@@ -20,19 +31,30 @@ class Frontend
       
 
       system 'clear'
+      puts "Welcome to My Card Capstone"
+      puts
+      puts
 
+      puts "Enter [signup] to create a new user account"
+      puts "Enter [login] to login to your account"
+      puts "Enter [logout] to logout of your account"
+      puts
+      puts "Enter [remove] to remove your account"
+      puts
+      puts
       puts "Press [1] to show all cards"
       # puts "    Press [1.1] to search by name"
+      # puts "    Press [1.2] to show Community cards"
       puts "Press [2] to show a specific card"
+      puts "    Press [2.1] give a specific card a price"
+      puts "    Press [2.2] to leave a comment on a card"
       puts "Press [3] to create a new card"
       puts "Press [4] to update a card"
       puts "Press [5] to delete a card"
       puts
       puts "Enter [cards] to display your cards"
       puts
-      puts "Enter [signup] to create a new user account"
-      puts "Enter [login] to login to your account"
-      puts "Enter [logout] to logout of your account"
+      puts "Enter [comments] to display your comments"
       puts
       puts "Press [q] to quit"
       user_choice = gets.chomp
@@ -43,12 +65,20 @@ class Frontend
 
       # elsif user_choice == "1.1"
       #   cards_search_action
+
+      # elsif user_choice == "1.2"
+      #   cards_community_action
         
 
       elsif user_choice == "2"
         cards_show_action
 
+      elsif user_choice == "2.1"
+        price_create_action
           
+      elsif user_choice == "2.2"
+        comment_create_action
+        
       elsif user_choice == "3"
         card_create_action
 
@@ -60,7 +90,9 @@ class Frontend
 
       elsif user_choice == "cards"
         user_cards_index_action
-        
+
+      elsif user_choice == "comments"
+        comments_index_action
 
       elsif user_choice == "signup"
         user_create_action
@@ -89,6 +121,13 @@ class Frontend
       elsif user_choice == "logout"
         jwt = ""
         Unirest.clear_default_headers
+
+      elsif user_choice == "remove"
+        print "What is your user id? "
+        user_id = gets.chomp
+        response = Unirest.delete("http://localhost:3000/users/#{user_id}")
+
+        p response.body["message"]
 
 
       elsif user_choice == "q"

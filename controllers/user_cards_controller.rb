@@ -16,7 +16,7 @@ module UserCardsController
     if cards_choice == '1'
       card_create_action
     elsif cards_choice == '2'
-      
+      user_card_destroy_action
     else
         
     end
@@ -39,4 +39,27 @@ module UserCardsController
     user_cards_show_view(user_card)
   end
 
+  def user_card_destroy_action
+    response = Unirest.get("http://localhost:3000/user_cards")
+    cards = response.body
+    
+    cards.each do |card|
+      puts "=" * 50
+      puts "Card ID: #{card["id"]}"
+      puts "Card Name: #{card["name"]}"
+      puts
+    end
+    print "Which card would you like to get rid of (ID:)? "
+    input_id = gets.chomp
+    response = Unirest.delete("http://localhost:3000/user_cards/#{input_id}")
+
+    json_data = response.body
+    puts json_data["message"]
+  end
+
 end
+
+
+
+
+
