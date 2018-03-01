@@ -77,6 +77,7 @@ module UserCardsController
     
     puts "    Your Cards:"
     cards.each do |card|
+      p card
       puts "=" * 50
       puts "Card ID: #{card["id"]}"
       puts "Card Name: #{card["name"]}"
