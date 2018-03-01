@@ -2,12 +2,11 @@ module PricesController
   def prices_index_action(input_id)
     response = Unirest.get("http://localhost:3000/prices?search=#{input_id}")
     prices = response.body
-
     prices_index_view(prices)
   end
 
   def price_create_action
-    print "Enter the ID of the card to see: "
+    print "Enter the ID of the card to leave a price on: "
 
     client_params = {}
     input_id = gets.chomp
@@ -35,9 +34,30 @@ module PricesController
                                 )
     price = response.body
     price_show_view(price)
+
+  end
+
+  def price_average_action
+    print "Enter the ID of the card who's average price you want to see: "
+    input_id = gets.chomp
+
+    response = Unirest.get("http://localhost:3000/prices?search=#{input_id}")
+    prices = response.body
+    average = 0
+    entries = 0
+
+    prices.each do |price|
+        average += price["value"].to_i
+        entries += 1
+    end
+    average = average / entries
+    price_average_view(average, entries)
   end
 
 end
+
+
+
 
 
 

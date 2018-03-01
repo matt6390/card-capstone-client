@@ -12,17 +12,19 @@ module CardsController
         print "Enter the ID of the card to see: "
         input_id = gets.chomp
 
-        response = Unirest.get("http://localhost:3000/cards/#{input_id}")
-        card = response.body
-        card_show_view(card)
+        if input_id != ""
+            response = Unirest.get("http://localhost:3000/cards/#{input_id}")
+            card = response.body
+            card_show_view(card)
 
-        print "Press 'c' to show the comments on this card, 'p' to see its prices, or press 'enter' to continue: "
-        com_choice = gets.chomp
+            print "Press 'c' to show the comments on this card, 'p' to see its prices, or press 'enter' to continue: "
+            com_choice = gets.chomp
 
-        if com_choice == 'c'
-            comments_show_action(input_id)
-        elsif com_choice == 'p'
-            prices_index_action(input_id)
+            if com_choice == 'c'
+                comments_show_action(input_id)
+            elsif com_choice == 'p'
+                prices_index_action(input_id)
+            end
         end
     end
 
@@ -34,32 +36,32 @@ module CardsController
         print "Name: "
         client_params[:name] = gets.chomp
 
-        print "Description: "
-        client_params[:description] = gets.chomp
+        if client_params[:name] != ""
 
-        print "Attribute: "
-        client_params[:element] = gets.chomp
+            print "Description: "
+            client_params[:description] = gets.chomp
 
-        print "Card Type: "
-        client_params[:race] = gets.chomp
+            print "Attribute: "
+            client_params[:element] = gets.chomp
 
-        print "Rarity: "
-        client_params[:rarity] = gets.chomp
+            print "Card Type: "
+            client_params[:race] = gets.chomp
 
-        response = Unirest.post(
-                                "http://localhost:3000/cards",
-                                parameters: client_params
-                                )
+            print "Rarity: "
+            client_params[:rarity] = gets.chomp
 
-        card = response.body
+            response = Unirest.post(
+                                    "http://localhost:3000/cards",
+                                    parameters: client_params
+                                    )
 
-        user_card_create_action(card)
+            card = response.body
 
+            user_card_create_action(card)
+        end
     end
 
-    def card_update_action
-        print "Enter the ID of the card to update: "
-        input_id = gets.chomp
+    def card_update_action(input_id)
         client_params = {}
 
         response = Unirest.get("http://localhost:3000/cards/#{input_id}")

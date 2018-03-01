@@ -1,5 +1,8 @@
 require 'unirest'
 
+require 'rubygems'
+require 'twilio-ruby'
+
 require_relative 'controllers/cards_controller'
 require_relative 'controllers/comments_controller'
 require_relative 'controllers/users_controller'
@@ -48,8 +51,9 @@ class Frontend
       # puts "    Press [1.1] to search by name"
       # puts "    Press [1.2] to show Community cards"
       puts "Press [2] to show a specific card"
-      puts "    Press [2.1] to leave a price on a card"
-      puts "    Press [2.2] to leave a comment on a card"
+      puts "----Press [2.1] to leave a price on a card"
+      puts "------Press [2.11] to see average card cost"
+      puts "----Press [2.2] to leave a comment on a card"
       puts "Press [3] to create a new card"
       puts "Press [4] to update a card"
       puts "Press [5] to delete one of your cards"
@@ -76,6 +80,9 @@ class Frontend
 
       elsif user_choice == "2.1"
         price_create_action
+
+      elsif user_choice == "2.11"
+        price_average_action
           
       elsif user_choice == "2.2"
         comment_create_action
@@ -84,7 +91,8 @@ class Frontend
         card_create_action
 
       elsif user_choice == "4"
-        card_update_action
+        # card_update_action
+        user_card_update_action
 
       elsif user_choice == "5"
         user_card_destroy_action
