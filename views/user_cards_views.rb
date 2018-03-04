@@ -1,14 +1,17 @@
 module UserCardsViews
   def user_cards_index_view(cards)
+    puts "Users Cards"
+    puts "=" * 50
     cards.each do |card|
-      puts
-      puts "#{card["id"]}"
-      puts "Card Name: #{card["name"]}"
+      puts "#{card["card_id"]}"
+      puts "Card Name: #{card["card_name"]}"
       puts "-" * 80
-      puts "Card Description: #{card["description"]}"
+      puts "Card Description: #{card["card_description"]}"
       puts "Card Element: #{card["element"]}"
-      puts "Card Attribute: #{card["race"]}"
+      puts "Card Race: #{card["race"]}"
       puts "Card Rarity: #{card["rarity"]}"
+      puts "Card Condition: #{card["condition"]}"
+      puts "Print Tag: #{card["print_tag"]}"
       puts
     end
   end

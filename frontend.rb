@@ -46,10 +46,12 @@ class Frontend
       puts "Enter [remove] to remove your account"
       puts "-" * 50
       puts
+      puts "Enter [cards] to display your cards"
+      puts
       puts "Press [1] to show all cards"
-      puts "   Enter [cards] to display your cards"
-      # puts "    Press [1.1] to search by name"
-      # puts "    Press [1.2] to show Community cards"
+      puts "    Press [1.1] to search by name"
+      puts "    Press [1.2] to sort by Element"
+      puts "    Press [1.3] to sort by Type"
       puts "Press [2] to show a specific card"
       puts "----Press [2.1] to leave a price on a card"
       puts "------Press [2.11] to see average card cost"
@@ -68,11 +70,15 @@ class Frontend
       if user_choice == "1"
         cards_index_action
 
-      # elsif user_choice == "1.1"
-      #   cards_search_action
+      elsif user_choice == "1.1"
+        cards_search_action
 
-      # elsif user_choice == "1.2"
-      #   cards_community_action
+      elsif user_choice == "1.2"
+        cards_sort_action("element")
+
+
+      elsif user_choice == "1.3"
+        cards_sort_action("race")
         
 
       elsif user_choice == "2"

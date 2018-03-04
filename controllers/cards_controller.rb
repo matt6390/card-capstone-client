@@ -1,7 +1,7 @@
 module CardsController
 
     def cards_index_action
-        response = Unirest.get("http://localhost:3000/cards")
+        response = get_request("/cards")
         cards = response.body
 
         cards_index_view(cards)
@@ -102,6 +102,27 @@ module CardsController
 
         json_data = response.body
         puts json_data["message"]
+    end
+
+    def cards_search_action
+        print "Enter the name to search for: "
+        search_term = gets.chomp
+
+        if search_term != ""
+            card_hashs = get_request("/cards/?search=#{search_term}")
+            cards = Card.convert_hashs(card_hashs)
+            
+            cards_search_view(cards)
+        else
+            puts "Sorry, but there were no results for that."
+        end
+    end
+
+    def cards_sort_action(sort)
+        card_hashs = get_request("/cards?sort=#{sort}")
+        cards = Card.convert_hashs(card_hashs)
+
+        cards_search_view(cards)
     end
 end
     

@@ -4,6 +4,7 @@ module UserCardsController
     response = Unirest.get("http://localhost:3000/user_cards")
     cards = response.body
 
+    # p cards
     user_cards_index_view(cards)
 
     print "Would you like to add another card [1], remove a card [2], view one of your cards [3],  or continue [enter]: "
@@ -49,6 +50,7 @@ module UserCardsController
                             parameters: client_params
                             )
     user_card = response.body
+    # p user_card
     user_cards_create_view(user_card)
   end
 
@@ -59,8 +61,8 @@ module UserCardsController
     puts "    Your Cards:"
     cards.each do |card|
       puts "=" * 50
-      puts "Card ID: #{card["id"]}"
-      puts "Card Name: #{card["name"]}"
+      puts "Card ID: #{card["card_id"]}"
+      puts "Card Name: #{card["card_name"]}"
       puts
     end
     print "Which card would you like to get edit (ID:)? "
@@ -79,14 +81,15 @@ module UserCardsController
     cards.each do |card|
       p card
       puts "=" * 50
-      puts "Card ID: #{card["id"]}"
-      puts "Card Name: #{card["name"]}"
+      puts "Card ID: #{card["card_id"]}"
+      puts "Card Name: #{card["card_name"]}"
       puts
     end
     print "Which card would you like to get rid of (ID:)? "
     input_id = gets.chomp
 
     if input_id != ""
+    response_first = delete_request("/cards/#{input_id}")
     response = Unirest.delete("http://localhost:3000/user_cards/#{input_id}")
 
     json_data = response.body
