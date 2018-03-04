@@ -1,7 +1,7 @@
 module CardsController
 
     def cards_index_action
-        response = get_request("/cards")
+        response = Unirest.get('http://localhost:3000/cards')
         cards = response.body
 
         cards_index_view(cards)
@@ -50,7 +50,7 @@ module CardsController
             print "Rarity: "
             client_params[:rarity] = gets.chomp
 
-            response = Unirest.post(
+            response = Unirest.get(
                                     "http://localhost:3000/cards",
                                     parameters: client_params
                                     )
@@ -86,9 +86,9 @@ module CardsController
         client_params.delete_if { |key, value| value.empty?}
 
         update_response = Unirest.patch(
-                                "http://localhost:3000/cards/#{input_id}",
-                                parameters: client_params
-                                )
+                                        "http://localhost:3000/cards/#{input_id}",
+                                         parameters: client_params
+                                        )
 
         card = update_response.body
 
@@ -109,10 +109,11 @@ module CardsController
         search_term = gets.chomp
 
         if search_term != ""
-            card_hashs = get_request("/cards/?search=#{search_term}")
-            cards = Card.convert_hashs(card_hashs)
-            
-            cards_search_view(cards)
+            response = Unirest.get("http://localhost:3000/cards/?search=#{search_term}")
+            cards = response.body     
+
+            # p cards        
+            cards_index_view(cards)
         else
             puts "Sorry, but there were no results for that."
         end

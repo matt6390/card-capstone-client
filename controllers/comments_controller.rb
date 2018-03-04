@@ -16,8 +16,8 @@ module CommentsController
     puts "Comment: "
     client_params[:text] = gets.chomp
 
-    response = Unirest.post(
-                            "http://localhost:3000/comments",
+    response = post_request(
+                            "/comments",
                             parameters: client_params
                             )
     comment = response.body
@@ -26,7 +26,7 @@ module CommentsController
   end
 
   def comments_show_action(card_id)
-      response = Unirest.get("http://localhost:3000/comments/#{card_id}")
+      response = Unirest.get("http://localhost:3000/comments/?search=#{card_id}")
       comments = response.body
       # p comments
       comments_index_view(comments)

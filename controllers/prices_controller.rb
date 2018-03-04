@@ -29,9 +29,9 @@ module PricesController
     client_params[:style] = gets.chomp
 
     response = Unirest.post(
-                                "http://localhost:3000/prices",
-                                parameters: client_params
-                                )
+                            "http://localhost:3000/prices",
+                            parameters: client_params
+                            )
     price = response.body
     price_show_view(price)
 

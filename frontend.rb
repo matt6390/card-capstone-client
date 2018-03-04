@@ -1,6 +1,6 @@
 require 'unirest'
 
-require 'rubygems'
+# require 'rubygems'
 require 'twilio-ruby'
 
 require_relative 'controllers/cards_controller'
@@ -52,6 +52,7 @@ class Frontend
       puts "    Press [1.1] to search by name"
       puts "    Press [1.2] to sort by Element"
       puts "    Press [1.3] to sort by Type"
+      puts "    Press [1.4] to sort by Alphabetical Name Order"
       puts "Press [2] to show a specific card"
       puts "----Press [2.1] to leave a price on a card"
       puts "------Press [2.11] to see average card cost"
@@ -79,6 +80,9 @@ class Frontend
 
       elsif user_choice == "1.3"
         cards_sort_action("race")
+
+      elsif user_choice == "1.4"
+        cards_sort_action("name")
         
 
       elsif user_choice == "2"

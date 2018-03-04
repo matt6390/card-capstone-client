@@ -27,7 +27,7 @@ module UserCardsController
   def user_card_show_action
     print "Enter the ID of your card: "
     input_id = gets.chomp
-    response = Unirest.get( "http://localhost:3000/user_cards/#{input_id}")
+    response = Unirest.get("http://localhost:3000/user_cards/#{input_id}")
     user_card = response.body
 
     response = Unirest.get("http://localhost:3000/cards/#{input_id}")
@@ -89,7 +89,7 @@ module UserCardsController
     input_id = gets.chomp
 
     if input_id != ""
-    response_first = delete_request("/cards/#{input_id}")
+    response_first = Unirest.delete("http://localhost:3000/cards/#{input_id}")
     response = Unirest.delete("http://localhost:3000/user_cards/#{input_id}")
 
     json_data = response.body
