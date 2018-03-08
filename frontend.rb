@@ -5,6 +5,8 @@ require 'twilio-ruby'
 
 require_relative 'controllers/cards_controller'
 require_relative 'controllers/comments_controller'
+require_relative 'controllers/decks_controller'
+require_relative 'controllers/deck_cards_controller'
 require_relative 'controllers/users_controller'
 require_relative 'controllers/prices_controller'
 require_relative 'controllers/user_cards_controller'
@@ -13,6 +15,8 @@ require_relative 'views/cards_views'
 require_relative 'views/comments_views'
 require_relative 'views/prices_views'
 require_relative 'views/user_cards_views'
+require_relative 'views/decks_views'
+require_relative 'views/deck_cards_views'
 
 require_relative 'models/card'
 
@@ -23,11 +27,15 @@ class Frontend
   include UsersController
   include PricesController
   include UserCardsController
+  include DecksController
+  include DeckCardsController
   
   include CardsViews
   include CommentsViews
   include PricesViews
   include UserCardsViews
+  include DecksViews
+  include DeckCardsViews
 
   def run
     while true
@@ -61,6 +69,10 @@ class Frontend
       puts "Press [4] to update a card"
       puts "Press [5] to delete one of your cards"
       puts "-" * 50
+      puts  
+      puts 'Press [d] to create a new deck'
+      puts 'Press [ds] to show all your decks'
+      puts 'Press [dc] to add a card to a deck'
       puts
       puts "Enter [comments] to display all comments"
       puts
@@ -76,7 +88,6 @@ class Frontend
 
       elsif user_choice == "1.2"
         cards_sort_action("element")
-
 
       elsif user_choice == "1.3"
         cards_sort_action("race")
@@ -109,6 +120,15 @@ class Frontend
 
       elsif user_choice == "cards"
         user_cards_index_action
+
+      elsif user_choice == "d"
+        deck_create_action
+
+      elsif user_choice == "ds"
+        decks_index_action  
+
+      elsif user_choice == "dc"
+        deck_add_card_action
 
       elsif user_choice == "comments"
         comments_index_action
