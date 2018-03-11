@@ -29,11 +29,9 @@ module UserCardsController
     input_id = gets.chomp
     response = Unirest.get("http://localhost:3000/user_cards/#{input_id}")
     user_card = response.body
+    # p user_card
 
-    response = Unirest.get("http://localhost:3000/cards/#{input_id}")
-    card = response.body
-
-    user_card_show_view(user_card, card)
+    user_card_show_view(user_card)
   end
 
   def user_card_create_action(card)
@@ -58,13 +56,8 @@ module UserCardsController
     response = Unirest.get("http://localhost:3000/user_cards")
     cards = response.body
     
-    puts "    Your Cards:"
-    cards.each do |card|
-      puts "=" * 50
-      puts "Card ID: #{card["card_id"]}"
-      puts "Card Name: #{card["card_name"]}"
-      puts
-    end
+    user_cards_simple_view(cards)
+    
     print "Which card would you like to get edit (ID:)? "
     input_id = gets.chomp
     
@@ -77,14 +70,8 @@ module UserCardsController
     response = Unirest.get("http://localhost:3000/user_cards")
     cards = response.body
     
-    puts "    Your Cards:"
-    cards.each do |card|
-      p card
-      puts "=" * 50
-      puts "Card ID: #{card["card_id"]}"
-      puts "Card Name: #{card["card_name"]}"
-      puts
-    end
+    user_cards_simple_view(cards)
+
     print "Which card would you like to get rid of (ID:)? "
     input_id = gets.chomp
 

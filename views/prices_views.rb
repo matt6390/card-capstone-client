@@ -15,13 +15,12 @@ module PricesViews
       end
     else
       puts
-      puts "There are no prices listed yet" 
+      puts "There are no prices listed yet for this card" 
     end
   end
 
-  def price_average_view(average, entries)
+  def price_average_view(average)
     puts 
-    puts "With #{entries} total prices added,"
-    puts "the average price of this card is: $#{average}"     
+    puts "The average price of this card is $#{average}"     
   end
 end

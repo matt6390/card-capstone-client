@@ -41,17 +41,13 @@ module PricesController
     print "Enter the ID of the card who's average price you want to see: "
     input_id = gets.chomp
 
-    response = Unirest.get("http://localhost:3000/prices?search=#{input_id}")
-    prices = response.body
-    average = 0
-    entries = 0
-
-    prices.each do |price|
-        average += price["value"].to_i
-        entries += 1
-    end
-    average = average / entries
-    price_average_view(average, entries)
+    response = Unirest.get("http://localhost:3000/cards/#{input_id}")
+    card = response.body
+    # p card
+    average = card["average_price"]
+    # p average
+    
+    price_average_view(average)
   end
 
 end
