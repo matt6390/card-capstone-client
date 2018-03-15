@@ -10,6 +10,7 @@ require_relative 'controllers/deck_cards_controller'
 require_relative 'controllers/users_controller'
 require_relative 'controllers/prices_controller'
 require_relative 'controllers/user_cards_controller'
+require_relative 'controllers/yugioh_controller'
 
 require_relative 'views/cards_views'
 require_relative 'views/comments_views'
@@ -17,6 +18,7 @@ require_relative 'views/prices_views'
 require_relative 'views/user_cards_views'
 require_relative 'views/decks_views'
 require_relative 'views/deck_cards_views'
+require_relative 'views/yugioh_views'
 
 require_relative 'models/card'
 
@@ -29,6 +31,7 @@ class Frontend
   include UserCardsController
   include DecksController
   include DeckCardsController
+  include YuGiOhController
   
   include CardsViews
   include CommentsViews
@@ -36,6 +39,7 @@ class Frontend
   include UserCardsViews
   include DecksViews
   include DeckCardsViews
+  include YuGiOhViews
 
   def run
     while true
@@ -73,6 +77,10 @@ class Frontend
       puts 'Press [d] to create a new deck'
       puts 'Press [ds] to show all your decks'
       puts 'Press [dc] to add a card to a deck'
+      puts 'Press [dd] to remove a card from a deck'
+      puts 
+      puts 'Press [yuname] to get price info by card name'
+      puts 'Press [cs] to search for card details by name'
       puts
       puts "Enter [comments] to display all comments"
       puts
@@ -119,6 +127,9 @@ class Frontend
         user_card_destroy_action
 
       elsif user_choice == "cards"
+
+
+
         user_cards_index_action
 
       elsif user_choice == "d"
@@ -130,8 +141,26 @@ class Frontend
       elsif user_choice == "dc"
         deck_add_card_action
 
+      elsif user_choice == "dd"
+        deck_delete_card_action
+
+
+
+
+      elsif user_choice == "yuname"
+        yugioh_name_price_search
+
+      elsif user_choice == "cs"
+        yugioh_card_details_search
+
+
+
       elsif user_choice == "comments"
         comments_index_action
+
+
+
+
 
       elsif user_choice == "signup"
         user_create_action

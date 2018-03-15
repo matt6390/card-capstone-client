@@ -19,8 +19,9 @@ module PricesViews
     end
   end
 
-  def price_average_view(average)
+  def price_average_view(average, market_average)
     puts 
-    puts "The average price of this card is $#{average}"     
+    puts "The average price of this card is $#{average}"
+    puts "The Market Average of this card id $#{market_average}"    
   end
 end

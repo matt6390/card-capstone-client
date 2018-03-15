@@ -1,6 +1,6 @@
 module DeckCardsController
   def deck_card_create_action(deck_id)
-    p deck_id
+    # p deck_id
     client_params = {}
     client_params[:deck_id] = deck_id
 
@@ -18,4 +18,16 @@ module DeckCardsController
     p deck_card
     deck_card_create_view(card)
   end
+
+  def deck_card_delete_action(card_id)
+    p card_id
+
+    response = Unirest.delete("http://localhost:3000/deck_cards/#{card_id}")
+    data = response.body
+    puts data["message"]
+
+  end
 end
+
+
+

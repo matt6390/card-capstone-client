@@ -3,7 +3,7 @@ module UserCardsViews
     puts "Users Cards"
     puts "=" * 50
     cards.each do |card|
-      # p card
+      p card
       puts "#{card["card"]["id"]}"
       puts "Card Name: #{card["card"]["name"]}"
       puts "-" * 80

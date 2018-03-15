@@ -1,0 +1,3 @@
+module YuGiOhViews
+
+end

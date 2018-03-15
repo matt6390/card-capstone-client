@@ -35,8 +35,25 @@ module DecksController
         deck_card_create_action(deck_id)
       end
     end
+  end
 
+  def deck_delete_card_action
+    response = Unirest.get('http://localhost:3000/decks')
+    decks = response.body
+    # p decks 
+    decks_index_view(decks)
+    print "Enter the ID of the deck you'd like to delete a card from: "
+    deck_id = gets.chomp
 
+    if deck_id != ""
+      deck_show_action(deck_id)
+      print "Enter the ID of the card you would like to remove: "
+      card_id = gets.chomp
+
+      if card_id != ""
+        deck_card_delete_action(card_id)
+      end
+    end
   end
 
   def deck_create_action
@@ -58,7 +75,7 @@ module DecksController
       deck_show_view(deck)
     end
   end
-  
+
 end
 
 
