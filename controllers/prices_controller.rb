@@ -46,7 +46,7 @@ module PricesController
 
     market_response = Unirest.get('http://yugiohprices.com/api/price_for_print_tag/' + card['user_card']["print_tag"])
     market_average = market_response.body["data"]['price_data']['price_data']['data']['prices']['average']
-    # p card
+    # p card⁄
     average = card["average_price"]
     # p average
     

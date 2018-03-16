@@ -2,10 +2,20 @@ module YuGiOhController
 
   def yugioh_name_price_search
     print "What is the name of your card? (Be careful for spelling and punctuation): "
-    card_name = "Blue-Eyes White Dragon" 
+    card_name = gets.chomp
+    print "What is the print-tag of your card: "
+    print_tag = gets.chomp.upcase
     response = Unirest.get("http://yugiohprices.com/api/get_card_prices/" + card_name)
-    
-    p response
+    cards = response.body["data"]
+    # p cards
+
+    cards.each do |card|
+      if card['print_tag'] == print_tag
+        yugioh_name_price_view(card, card_name)
+        puts "-" * 50
+      end
+    end
+
   end
 
   def yugioh_card_details_search
