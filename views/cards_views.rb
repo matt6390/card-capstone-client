@@ -7,7 +7,7 @@ module CardsViews
   end
 
   def card_show_view(card)
-    # p card
+    p card
     puts
     puts "Card Name: #{card["name"]} (ID: #{card["id"]})"
     puts "Owner: #{card["user"]["name"]}"

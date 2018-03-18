@@ -57,7 +57,6 @@ module UserCardsViews
       puts
     end
   end
-
 end
 
 

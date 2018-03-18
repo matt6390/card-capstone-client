@@ -58,7 +58,7 @@ module UserCardsController
     
     user_cards_simple_view(cards)
     
-    print "Which card would you like to get edit (ID:)? "
+    print "Which card would you like to edit (ID:)? "
     input_id = gets.chomp
     
     if input_id != ""

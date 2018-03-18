@@ -127,9 +127,6 @@ class Frontend
         user_card_destroy_action
 
       elsif user_choice == "cards"
-
-
-
         user_cards_index_action
 
       elsif user_choice == "d"
