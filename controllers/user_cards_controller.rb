@@ -35,6 +35,7 @@ module UserCardsController
   end
 
   def user_card_create_action(card)
+    p card
     client_params = {}
     puts "What condition is it in? "
     client_params[:condition] = gets.chomp

@@ -50,7 +50,7 @@ module CardsController
             print "Rarity: "
             client_params[:rarity] = gets.chomp
 
-            response = Unirest.get(
+            response = Unirest.post(
                                     "http://localhost:3000/cards",
                                     parameters: client_params
                                     )
